@@ -26,7 +26,8 @@ void setLed(uint32_t lednum, tWS2801_RGB color){
 
 // Callback function for refreshing the leds
 void refresh(void){
-	WS2812_Refresh(200);
+	uint32_t ledsToRefresh = WS2801_Slave_GetLastReceivedLedNumber();
+	WS2812_Refresh(ledsToRefresh);
 }
 
 int main(void){

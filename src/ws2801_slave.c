@@ -26,6 +26,7 @@ static void (*frameCompleteCb)(void) = 0;
 static uint32_t lednum = 0;
 static uint8_t cnt = 0;
 static uint8_t frameComplete = 0;
+static uint32_t receivedLedNum = 0;
 
 
 void WS2801_Slave_Init(void){
@@ -91,6 +92,9 @@ uint8_t WS2801_Slave_FrameComplete(void){
 	return tmp;
 }
 
+uint32_t WS2801_Slave_GetLastReceivedLedNumber(void){
+	return receivedLedNum;
+}
 
 static void Spi_Handler(uint8_t ch){
 	static uint32_t last = 0;
@@ -137,6 +141,7 @@ void EXTI4_IRQHandler(void){
 		EXTI_ClearITPendingBit(EXTI_Line4);
 		frameComplete = 1;
 		cnt = 0;
+		receivedLedNum = lednum;
 		lednum = 0;
 
 		if(frameCompleteCb != 0){

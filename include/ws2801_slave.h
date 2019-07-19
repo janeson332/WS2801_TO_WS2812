@@ -46,6 +46,12 @@ void    WS2801_Slave_SetFrameCompleteCallback(void(*cb)(void));
 uint8_t WS2801_Slave_FrameComplete(void);
 
 
+/**
+ * @brief returns the number of leds received in the last frame
+ */
+uint32_t WS2801_Slave_GetLastReceivedLedNumber(void);
+
+
 
 
 
